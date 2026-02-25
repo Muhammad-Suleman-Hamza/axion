@@ -11,7 +11,7 @@
 
 1. **Clone the repository:**
    ```sh
-   git clone <your-repo-url>
+   git clone https://github.com/Muhammad-Suleman-Hamza/axion.git
    cd axion
    ```
 2. **Install dependencies:**
