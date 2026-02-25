@@ -167,7 +167,7 @@ module.exports = class ApiHandler {
 
                 let body = req.body || {};
 
-                if (fnName !== 'login') {
+                if (fnName !== 'login' && fnName !== 'create') {
                     if (!moduleMatrix.role.includes(req.decoded.role)) {
                         return this.managers.responseDispatcher.dispatch(res, { ok: false, message: "Not Authorized. Please review your access." });
                     }
