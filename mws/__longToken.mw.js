@@ -1,8 +1,8 @@
-let ignoredURLs = ['/api/user/login', '/api/user/create']
+let ignoredURLs = ['/api/user/login']
 
 module.exports = ({ meta, config, managers }) => {
     return ({ req, res, next }) => {
-        const token = res.req.headers.authorization.replace("Bearer","").trim();
+        const token = res.req.headers.authorization?.replace("Bearer","")?.trim();
         if (!token && !ignoredURLs.includes(res.req.url)) {
             console.log('token required but not found')
             return managers.responseDispatcher.dispatch(res, { ok: false, code: 401, errors: 'unauthorized' });

@@ -27,28 +27,29 @@ module.exports = class ApiHandler {
 
         this.methodMatrix = {
             "user": {
+                "role": ["superadmin"],
                 "post": ["create", "login", "assign"],
             },
-            "student": {
-                "role": "admin",
+            "school": {
                 "post": ["create"],
                 "patch": ["update"],
                 "delete": ["delete"],
+                "role": ["superadmin"],
                 "get": ["get", "getAll"],
             },
-            "school": {
-                "role": "superadmin",
+            "student": {
                 "post": ["create"],
                 "patch": ["update"],
                 "delete": ["delete"],
                 "get": ["get", "getAll"],
+                "role": ["admin", "superadmin"],
             },
             "classroom": {
-                "role": "admin",
                 "post": ["create"],
                 "patch": ["update"],
                 "delete": ["delete"],
-                "get": ["get", "getAll"]
+                "get": ["get", "getAll"],
+                "role": ["admin", "superadmin"],
             },
         };
 
@@ -142,35 +143,37 @@ module.exports = class ApiHandler {
     /** middleware for admin APIS */
     async mw(req, res, next) {
 
-        let fnName = req.params.fnName;
-        let context = req.params.context;
-        let method = req.method.toLowerCase();
-        let moduleName = req.params.moduleName;
-        let moduleMatrix = this.methodMatrix[moduleName];
+        const fnName = req.params.fnName;
+        const method = req.method.toLowerCase();
+        const moduleName = req.params.moduleName;
+        const moduleMatrix = this.methodMatrix[moduleName];
 
-        if (!moduleMatrix) return this.managers.responseDispatcher.dispatch(res, { ok: false, message: `module ${moduleName} not found` });
+        if (!moduleMatrix) return this.managers.responseDispatcher.dispatch(res, { ok: false, message: `Module ${moduleName} not found.` });
 
         if (!moduleMatrix[method]) {
-            return this.managers.responseDispatcher.dispatch(res, { ok: false, message: `unsupported method ${method} for ${moduleName}` });
+            return this.managers.responseDispatcher.dispatch(res, { ok: false, message: `Unsupported method route.` });
         }
 
         if (!moduleMatrix[method].includes(fnName)) {
-            return this.managers.responseDispatcher.dispatch(res, { ok: false, message: `unable to find function ${fnName} with method ${method}` });
+            return this.managers.responseDispatcher.dispatch(res, { ok: false, message: `Unable to find function ${fnName} with method ${method}` });
         }
 
-        let targetStack = this.mwsStack[`${moduleName}.${fnName}`];
+        const targetStack = this.mwsStack[`${moduleName}.${fnName}`];
 
-        let hotBolt = this.mwsExec.createBolt({
+        const hotBolt = this.mwsExec.createBolt({
             stack: targetStack, req, res, onDone: async ({ req, res, results }) => {
 
                 /** executed after all middleware finished */
 
                 let body = req.body || {};
-                if (moduleName !== 'school' && moduleMatrix.role === 'superadmin') {
-                    return this.managers.responseDispatcher.dispatch(res, { ok: false, message: "failed to perform this action. review your access" });
+
+                if (fnName !== 'login') {
+                    if (!moduleMatrix.role.includes(req.decoded.role)) {
+                        return this.managers.responseDispatcher.dispatch(res, { ok: false, message: "Not Authorized. Please review your access." });
+                    }
                 }
 
-                let result = await this._exec({
+                const result = await this._exec({
                     targetModule: this.managers[moduleName], fnName, data: {
                         ...body,
                         ...results,
