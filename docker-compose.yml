@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  redis:
+    container_name: redis
+    image: redis/redis-stack:latest
+    ports:
+      - 6379:6379
+    command:
+      redis-server --save 20 1 --loglevel warning --protected-mode no
+    volumes:
+      - redis_data:/data/redis
+    networks:
+      - apps
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  mongo:
+    container_name: mongo
+    image: mongo:6.0
+    ports:
+      - 27017:27017
+    volumes:
+      - mongo_data:/data/db
+    restart: unless-stopped
+    networks:
+      - apps
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  user:
+    build: .
+    ports:
+      - 5111:5111
+    env_file: '.env'
+    environment:
+      - REDIS_URI=redis://redis:6379
+      - CACHE_REDIS=redis://redis:6379
+      - OYSTER_REDIS=redis://redis:6379
+      - CORTEX_REDIS=redis://redis:6379
+      - MONGO_URI=mongodb://mongo:27017/axion
+    restart: unless-stopped
+    networks:
+      - apps
+
+volumes:
+  mongo_data:
+  redis_data:
+
+networks:
+  apps:
+    driver: bridge
