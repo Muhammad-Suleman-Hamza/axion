@@ -1,0 +1,521 @@
+{
+  "info": {
+    "_postman_id": "f9c72e92-3a9d-47a3-8dff-d47ccc32418c",
+    "name": "Axion",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "5583127"
+  },
+  "item": [
+    {
+      "name": "User",
+      "item": [
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"password\": \"123456789\",\r\n    \"email\": \"suleman-admin-1@gmail.com\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{axion-environment}}/user/login",
+              "host": [
+                "{{axion-environment}}"
+              ],
+              "path": [
+                "user",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"username\": \"suleman-admin-1\",\r\n    \"password\": \"123456789\",\r\n    \"email\": \"suleman-admin-12@gmail.com\",\r\n    \"role\": \"admin\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{axion-environment}}/user/create",
+              "host": [
+                "{{axion-environment}}"
+              ],
+              "path": [
+                "user",
+                "create"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Assign",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "",
+                "value": "",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"admins\": [\r\n        \"699e23cd77aa2fd9a8f2b95d\"\r\n    ],\r\n    \"schools\": [\r\n        \"699effa769ff925a269aa300\"\r\n    ]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{axion-environment}}/user/assign",
+              "host": [
+                "{{axion-environment}}"
+              ],
+              "path": [
+                "user",
+                "assign"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "School",
+      "item": [
+        {
+          "name": "Get",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{axion-environment}}/school/get?id=699e51bc539a6121bb9e05e2",
+              "host": [
+                "{{axion-environment}}"
+              ],
+              "path": [
+                "school",
+                "get"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "699e51bc539a6121bb9e05e2"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"schoolname\": \"1st school\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{axion-environment}}/school/create",
+              "host": [
+                "{{axion-environment}}"
+              ],
+              "path": [
+                "school",
+                "create"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"schoolname\": \"3rd school updated\",\r\n    \"id\": \"699ef71d04222accc0baee2b\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{axion-environment}}/school/update",
+              "host": [
+                "{{axion-environment}}"
+              ],
+              "path": [
+                "school",
+                "update"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"id\": \"699ef71d04222accc0baee2b\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{axion-environment}}/school/delete",
+              "host": [
+                "{{axion-environment}}"
+              ],
+              "path": [
+                "school",
+                "delete"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{axion-environment}}/school/getAll",
+              "host": [
+                "{{axion-environment}}"
+              ],
+              "path": [
+                "school",
+                "getAll"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Student",
+      "item": [
+        {
+          "name": "Get",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{axion-environment}}/student/get?id=699ef66b20253aafaf775b7a",
+              "host": [
+                "{{axion-environment}}"
+              ],
+              "path": [
+                "student",
+                "get"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "699ef66b20253aafaf775b7a"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"studentname\": \"2nd student\",\r\n    \"classroomid\": \"classroomid\",\r\n    \"schoolid\": \"schoolid\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{axion-environment}}/student/create",
+              "host": [
+                "{{axion-environment}}"
+              ],
+              "path": [
+                "student",
+                "create"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"id\": \"699ef66b20253aafaf775b7a\",\r\n    \"classroomid\": \"classroom updated\",\r\n    \"schoolid\": \"school updated\",\r\n    \"studentname\": \"1st student updated\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{axion-environment}}/student/update",
+              "host": [
+                "{{axion-environment}}"
+              ],
+              "path": [
+                "student",
+                "update"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"id\": \"699ef66b20253aafaf775b7a\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{axion-environment}}/student/delete",
+              "host": [
+                "{{axion-environment}}"
+              ],
+              "path": [
+                "student",
+                "delete"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{axion-environment}}/student/getAll",
+              "host": [
+                "{{axion-environment}}"
+              ],
+              "path": [
+                "student",
+                "getAll"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Classroom",
+      "item": [
+        {
+          "name": "Get",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{axion-environment}}/classroom/get?id=699ef82394d46ce1addb8569",
+              "host": [
+                "{{axion-environment}}"
+              ],
+              "path": [
+                "classroom",
+                "get"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "699ef82394d46ce1addb8569"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"classroomname\": \"1st classroom\",\r\n    \"schoolid\": \"schoolid\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{axion-environment}}/classroom/create",
+              "host": [
+                "{{axion-environment}}"
+              ],
+              "path": [
+                "classroom",
+                "create"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"id\": \"699ef82394d46ce1addb8569\",\r\n    \"schoolid\": \"school id updated\",\r\n    \"classroomname\": \"1st classroom updated\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{axion-environment}}/classroom/update",
+              "host": [
+                "{{axion-environment}}"
+              ],
+              "path": [
+                "classroom",
+                "update"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"id\": \"699ef82394d46ce1addb8569\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{axion-environment}}/classroom/delete",
+              "host": [
+                "{{axion-environment}}"
+              ],
+              "path": [
+                "classroom",
+                "delete"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{axion-environment}}/classroom/getAll",
+              "host": [
+                "{{axion-environment}}"
+              ],
+              "path": [
+                "classroom",
+                "getAll"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJ1c2VySWQiOiI2OTllNWU5ZjM3MTJmMzZhY2JhNDg0NDUiLCJzY2hvb2xzIjpbXSwiaWF0IjoxNzcyMDQzODg2LCJleHAiOjE4NjY3MTY2ODZ9.lvm8VtLgCfqh68fDkR9NhgCnCvt6NwwEyFXgcYvg0-A",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ]
+}
