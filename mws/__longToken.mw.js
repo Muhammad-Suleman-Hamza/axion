@@ -1,4 +1,4 @@
-let ignoredURLs = ['/api/user/login', '/api/user/create'];
+let ignoredURLs = ['/user/login', '/user/create'];
 
 module.exports = ({ meta, config, managers }) => {
     return ({ req, res, next }) => {
